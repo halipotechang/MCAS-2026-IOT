@@ -1,50 +1,50 @@
 import RPi.GPIO as GPIO
 import time
 
-LED_PIN = 17      # LED 腳位 (BCM GPIO17，實體腳位 11)，請依你的接線調整
-BUZZER_PIN = 18   # 蜂鳴器腳位 (BCM GPIO18，實體腳位 12)，請依你的接線調整
-freq = 523        # 蜂鳴器頻率 (523Hz，大約是 C5)
+PIN = 11       # LED 實體腳位 11 (BCM GPIO17)
+PIN2 = 12      # 蜂鳴器實體腳位 12 (BCM GPIO18)
+freq = 523     # 頻率 (523Hz，大約是 C5)
 
-UNIT = 0.2        # 摩斯密碼基本時間單位 (秒)
-DOT = UNIT        # 短 = 1 單位
-DASH = UNIT * 3   # 長 = 3 單位
-SYMBOL_GAP = UNIT       # 同一字母內，短/長之間間隔 1 單位
-LETTER_GAP = UNIT * 3   # 字母之間間隔 3 單位
-WORD_GAP = UNIT * 7     # 每次 SOS 之間間隔 7 單位
+UNIT = 0.2         # 摩斯密碼基本時間單位 (秒)
+DOT = UNIT         # 短 = 1 單位
+DASH = UNIT * 3    # 長 = 3 單位
 
-MORSE = {
-    "S": "...",
-    "O": "---",
-}
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(PIN, GPIO.OUT)
+GPIO.setup(PIN2, GPIO.OUT)
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN, GPIO.OUT)
-GPIO.setup(BUZZER_PIN, GPIO.OUT)
-
-buzzer = GPIO.PWM(BUZZER_PIN, freq)
+# 建立 PWM 物件，設定頻率 freq
+voice = GPIO.PWM(PIN2, freq)
 
 
-def signal(duration):
-    # 燈泡亮 + 蜂鳴器響，持續 duration 秒
-    GPIO.output(LED_PIN, GPIO.HIGH)
-    buzzer.start(50)
+def beep(duration):
+    GPIO.output(PIN, True)    # LED 亮
+    voice.start(50)           # duty 50%，發聲
     time.sleep(duration)
-    GPIO.output(LED_PIN, GPIO.LOW)
-    buzzer.stop()
+    GPIO.output(PIN, False)   # LED 滅
+    voice.stop()              # 停止發聲
+    time.sleep(UNIT)          # 短/長之間間隔 1 單位
 
 
 try:
     while True:
-        for letter in "SOS":
-            print(f"{letter}: {MORSE[letter]}")
-            for symbol in MORSE[letter]:
-                signal(DOT if symbol == "." else DASH)
-                time.sleep(SYMBOL_GAP)
-            time.sleep(LETTER_GAP - SYMBOL_GAP)
-        time.sleep(WORD_GAP - LETTER_GAP)
+        print("S: ...")
+        for i in range(3):
+            beep(DOT)
+        time.sleep(UNIT * 2)  # 字母間隔 3 單位 (beep 內已停 1 單位)
+
+        print("O: ---")
+        for i in range(3):
+            beep(DASH)
+        time.sleep(UNIT * 2)
+
+        print("S: ...")
+        for i in range(3):
+            beep(DOT)
+        time.sleep(UNIT * 6)  # 每次 SOS 之間間隔 7 單位
 
 except KeyboardInterrupt:
     pass
 finally:
-    buzzer.stop()
+    voice.stop()
     GPIO.cleanup()
