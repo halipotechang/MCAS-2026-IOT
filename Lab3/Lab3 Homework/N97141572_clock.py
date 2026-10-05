@@ -9,8 +9,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
 import RPi.GPIO as GPIO
 from tm1637 import TM1637
 
-CLK = 23   # 請更改至你實際接線的 GPIO 腳位 (BCM GPIO23，實體腳位 16)
-DIO = 24   # 請更改至你實際接線的 GPIO 腳位 (BCM GPIO24，實體腳位 18)
+CLK = 5    # 依投影片接線：BCM GPIO5（實體腳位 29）
+DIO = 4    # 依投影片接線：BCM GPIO4（實體腳位 7）
 
 tm = TM1637(clk=CLK, dio=DIO)
 tm.brightness(3)
