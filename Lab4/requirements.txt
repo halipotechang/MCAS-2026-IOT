@@ -1,0 +1,4 @@
+adafruit-circuitpython-dht
+lgpio
+RPi.GPIO
+pyserial
