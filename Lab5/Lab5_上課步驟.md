@@ -16,16 +16,16 @@
 
 ### 0-1 取得最新的 Lab5
 - [x] Mac：已經合併老師的 upstream，`Lab5/` 已經在 repo 裡
-- [ ] 樹莓派：把最新版本拉下來（路徑依你 clone 的位置調整；投影片用的是 `~/lab/MCAS-2026-IOT`）
+- [ ] 樹莓派：把最新版本拉下來
   ```bash
-  cd ~/lab/MCAS-2026-IOT
+  cd ~/MCAS-2026-IOT
   git pull
   ```
 
 ### 0-2 樹莓派建立 Lab5 虛擬環境（只要做一次）
 - [ ] 建立虛擬環境並安裝套件
   ```bash
-  cd ~/lab/MCAS-2026-IOT/Lab5
+  cd ~/MCAS-2026-IOT/Lab5
   python3 -m venv venv
   source venv/bin/activate
   python -m pip install -r requirements.txt
@@ -33,7 +33,7 @@
   ```
 - 之後每次開新的終端機，只要執行下面兩行：
   ```bash
-  cd ~/lab/MCAS-2026-IOT/Lab5
+  cd ~/MCAS-2026-IOT/Lab5
   source venv/bin/activate
   ```
 
@@ -59,7 +59,7 @@
 
 **樹莓派：啟動 Server**
 ```bash
-cd ~/lab/MCAS-2026-IOT/Lab5/01_WebSocket
+cd ~/MCAS-2026-IOT/Lab5/01_WebSocket
 python server.py
 ```
 預期輸出：
@@ -116,7 +116,7 @@ Sending frames... Press Ctrl+C to stop.
 
 **樹莓派：啟動 Subscriber**
 ```bash
-cd ~/lab/MCAS-2026-IOT/Lab5/02_ZeroMQ
+cd ~/MCAS-2026-IOT/Lab5/02_ZeroMQ
 python subscriber.py
 ```
 - [ ] 輸入 **Mac 的 IP**（注意這題要輸入的是筆電 IP，不是樹莓派 IP）
@@ -149,7 +149,7 @@ Receiving frames...
 
 **樹莓派：啟動 Server**
 ```bash
-cd ~/lab/MCAS-2026-IOT/Lab5/03_LLM_WebSocket
+cd ~/MCAS-2026-IOT/Lab5/03_LLM_WebSocket
 python server.py
 ```
 （輸出跟 Task 1 一樣）

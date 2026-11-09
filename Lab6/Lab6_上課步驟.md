@@ -26,7 +26,7 @@ Lab6 的程式重點（`app.py`）：
 ### Step 0：樹莓派取得最新的 Lab6
 保留自己改過的內容，只把助教新增的部分合併進來：
 ```bash
-cd ~/lab/MCAS-2026-IOT
+cd ~/MCAS-2026-IOT
 git status                 # 先確認沒有還沒 commit 的修改
 git fetch upstream
 git merge upstream/main    # 如果有衝突，會停下來讓你處理，不會直接覆蓋
@@ -36,7 +36,7 @@ git merge upstream/main    # 如果有衝突，會停下來讓你處理，不會
 ### Step 1：確認 Lab6 的檔案
 - [ ] 檢查檔案是否齊全
   ```bash
-  cd ~/lab/MCAS-2026-IOT/Lab6
+  cd ~/MCAS-2026-IOT/Lab6
   ls -la
   ```
   應該要看到：`app.py`、`requirements.txt`、`.env.template`、`templates/`、`static/`
@@ -48,7 +48,7 @@ git merge upstream/main    # 如果有衝突，會停下來讓你處理，不會
 ### Step 2：建立虛擬環境（只要做一次）
 - [ ] 建立虛擬環境並安裝套件
   ```bash
-  cd ~/lab/MCAS-2026-IOT/Lab6
+  cd ~/MCAS-2026-IOT/Lab6
   python3 -m venv venv
   source venv/bin/activate
   python -m pip install -r requirements.txt
@@ -77,7 +77,7 @@ git merge upstream/main    # 如果有衝突，會停下來讓你處理，不會
 ### Step 5：確認 `.env` 不會被上傳
 - [ ] 檢查 `.gitignore` 和 git 狀態
   ```bash
-  cd ~/lab/MCAS-2026-IOT
+  cd ~/MCAS-2026-IOT
   cat .gitignore      # 要有 .env 和 venv/（repo 根目錄的 .gitignore 已經有寫）
   git status          # Untracked files 裡面不應該出現 .env
   ```
@@ -89,7 +89,7 @@ git merge upstream/main    # 如果有衝突，會停下來讓你處理，不會
 ### Step 6：啟動 Flask（第一個終端機，啟動後不要關）
 - [ ] 啟動網站
   ```bash
-  cd ~/lab/MCAS-2026-IOT/Lab6
+  cd ~/MCAS-2026-IOT/Lab6
   source venv/bin/activate     # 如果還在虛擬環境裡，可以跳過這行
   python app.py
   ```
